@@ -1,5 +1,3 @@
-
-
 pragma solidity 0.5.12;
 
 contract Coinflip {
@@ -25,12 +23,12 @@ contract Coinflip {
     }
 
     event betPlaced(address user, uint bet, bool);
-    event contractFunded(address contractOwner, uint);
+    event contractFunded(address contractOwner, uint amount);
 
     //Flip the Coin and check whether user won or lost;
-    function flipCoin() public payable costs(0.01 ether) returns(bool) {
+    function flipCoin() public payable costs(0.01 ether) returns(bool success) {
         require(address(this).balance >= msg.value, "The contract doesnt have enough balance to play right now. Come Back later");
-        bool success;
+
         if (now % 2 == 0) {
             contractBalance += msg.value;
             success = false;
@@ -63,3 +61,4 @@ contract Coinflip {
         return msg.value;
     }
 }
+
